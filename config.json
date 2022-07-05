@@ -10,8 +10,8 @@
     "active": 1,
     "sections": {
       "calculator": {
-        "operations": ["add", "subtract", "multiply", "divide"],
-        "errors": ["IncompatibleTypes"]
+        "basic_operations": ["add", "subtract", "multiply", "divide"],
+        "advanced_operations": ["sin", "cos", "tan"]
       }
     }
   }
