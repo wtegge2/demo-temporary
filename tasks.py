@@ -14,7 +14,7 @@ from invoke.watchers import Responder
 @task
 def answers(c):
     responder1 = Responder(
-        pattern=r" Separate source and build directories (y/n) [n]",
+        pattern=r" Separate source and build directories (y/n)",
         response="\n",
     )
     responder2 = Responder(
