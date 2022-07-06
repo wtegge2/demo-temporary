@@ -23,7 +23,7 @@ jobs:
         run: |
           python -m pip install --user virtualenv
           virtualenv venv
-          ven"\"Scripts"\"activate
+          venv"\"Scripts"\"activate
 
       # this part makes sure sphinx is installed
       - uses: actions/checkout@master   # checks out repo so workflow can access it ----TEST THIS----
