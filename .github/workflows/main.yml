@@ -69,5 +69,6 @@ jobs:
       - uses: actions/checkout@master   
       - uses: actions/setup-python@v3   
       - name: make final html 
+        run: |
           cd docs
           make html
