@@ -1,5 +1,5 @@
 # This is a basic workflow to help you get started with Actions
-name: Auto-doc CI=false
+name: Auto-doc 
 
 # Controls when the workflow will run
 on:
@@ -18,11 +18,11 @@ jobs:
     
     steps:  # steps for the auto-documentation
 
-      #- uses: actions/checkout@master   # checks out repo so workflow can access it ----TEST THIS----
-      #- name: setup virtual environment
-      #  run: |
-      #    virtualenv venv
-      #    venv\Scripts\activate
+      - uses: actions/checkout@master   # checks out repo so workflow can access it ----TEST THIS----
+      - name: setup virtual environment
+        run: |
+          virtualenv venv
+          venv\Scripts\activate
 
 
       # this part makes sure sphinx is installed
@@ -31,15 +31,16 @@ jobs:
       - name: Install dependencies
         run: |                                  
           python -m pip install --upgrade pip
-          pip install -U sphinx
+          python -m pip install sphinx
+
           pip install sphinx-autodoc-typehints
           pip install sphinx_rtd_theme
-
-          pip install invoke
+          sphinx-build --version
+          
+          python -m pip install invoke
           invoke --version 
 
       
-
       # this part will call sphinx and automatically answer the prompts
       - uses: actions/checkout@master   
       - uses: actions/setup-python@v3   
@@ -47,13 +48,27 @@ jobs:
         run: |
           invoke answers
 
-
-      # this part automatically generates the rst files
+      # this part will build sphinx
       - uses: actions/checkout@master   
       - uses: actions/setup-python@v3   
-      - name: Build
+      - name: build sphinx
         run: |
           sphinx-build -b html docs/source/ docs/build/html
+
+      
+      # this part will build sphinx
+      - uses: actions/checkout@master   
+      - uses: actions/setup-python@v3   
+      - name: run python files
+        run: |
+          python docs/source/get_names.py
+          python docs/source/make_api.py
+          python docs/source/initial_write.py
+      
+      # final make
+      - uses: actions/checkout@master   
+      - uses: actions/setup-python@v3   
+      - name: make final html 
           cd docs
           make html
 
