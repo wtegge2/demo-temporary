@@ -71,7 +71,3 @@ jobs:
       - name: make final html 
           cd docs
           make html
-
-
-      #- name: Run a one-line script
-      #  run: echo Hello, world!
